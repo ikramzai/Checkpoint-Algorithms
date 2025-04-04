@@ -1,0 +1,51 @@
+START PROGRAM SentenceCounter
+
+MAKE:
+    total_letters = 0
+    total_words = 0
+    total_vowels = 0
+    last_char = ' '
+
+DO:
+    // Ask for first letter
+    PRINT "Enter first character:"
+    GET current_char
+
+    // Keep going until we see a dot
+    WHILE current_char IS NOT '.' DO:
+        // Count this letter
+        total_letters = total_letters + 1
+
+        // Check if it's a vowel
+        IF current_char IS 'a' OR 'e' OR 'i' OR 'o' OR 'u' OR
+           current_char IS 'A' OR 'E' OR 'I' OR 'O' OR 'U' THEN:
+            total_vowels = total_vowels + 1
+        END IF
+
+        // Check if we're starting a new word
+        IF current_char IS NOT ' ' AND last_char IS ' ' THEN:
+            total_words = total_words + 1
+        END IF
+
+        // Remember this character for next time
+        last_char = current_char
+
+        // Ask for next letter
+        PRINT "Enter next character:"
+        GET current_char
+    END WHILE
+
+    // Don't forget to count the dot!
+    total_letters = total_letters + 1
+
+    // Count last word if needed
+    IF last_char IS NOT ' ' AND total_letters > 1 THEN:
+        total_words = total_words + 1
+    END IF
+
+    // Show the results
+    PRINT "Total characters:", total_letters
+    PRINT "Total words:", total_words
+    PRINT "Total vowels:", total_vowels
+
+END PROGRAM
